@@ -24,19 +24,18 @@ public class RadioCharts {
     }
 
     public String getMostPlayedSong() {
-        String most_popular = "";
-        int sum = 0;
+        String mostPopular = "";
         String query = "SELECT song, sum(times_aired) FROM music_broadcast GROUP BY song ORDER BY sum(times_aired) DESC LIMIT 1;";
         try (Connection connection = getConnection()) {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
-                most_popular = resultSet.getString("song");
+                mostPopular = resultSet.getString("song");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return most_popular;
+        return mostPopular;
     }
 
     public String getMostActiveArtist() {
